@@ -1,16 +1,17 @@
 import java.util.Random;
 import java.util.Scanner;
 
+//Selection 5
 public class MineSweeperV2 {
 
-    // kullancağım değerleri ve string veya int ile tanımla
-    // map arka plandaki haritam , board oyuncunun gördüğü.
+    //  Selection 6 - define terms with string and int
+    //  The map is visible to the player and the board runs in the background.
     String[][] map;
     String[][] board;
     int rowNumber, colNumber, boardSize, mineCounter = 0;
 
 
-    //
+    ////Selection 5 - constructor creating .
     public MineSweeperV2(int rowNumber, int colNumber) {
         this.map = new String[rowNumber][colNumber];
         this.board = new String[rowNumber][colNumber];
@@ -20,74 +21,74 @@ public class MineSweeperV2 {
     }
 
 
-    // scanner ve randomu tanımla
+    // scanner and random define
     Random random = new Random();
     Scanner input = new Scanner(System.in);
 
-
-    // oyunu başlat , haritayı yazdır ve mayına basana kadar koordinat ise
-    // eğer yanlış değer girilirse hata yazdır.
+// Selection 6-
+    // Start the game and write the map ,
+    // print wrong  if the user enters the wrong value
     public void playGame() {
         int goRow, goCol, winCounteR = 0;
         prepareGame();
         createMap(map);
         System.out.println("===============================");
-        System.out.println("           OYUN BAŞLADI        ");
+        System.out.println("      THE GAME HAS STARTED     ");
         System.out.println("===============================");
         createMap(board);
 
 
-        //oyun sırasında hataya veya mayına denk gelmeyene kadar oyunu döndür
+        // Continue the game until you encounter no bugs or mines during the game.
         while (true) {
             while (true) {
-                System.out.print("Açmak istediğiniz kordinatın Row(satır) değerini giriniz : ");
+                System.out.print("Enter the coordinate Row value you want to open:");   // // Selection 9
                 if (input.hasNextInt()) {
                     goRow = input.nextInt();
-                    if (goRow < 0 || goRow > rowNumber - 1) {
-                        System.out.println("alan dışı değer");
+                    if (goRow < 0 || goRow > rowNumber - 1) {       // Selection 10
+                        System.out.println("YOU ENTERED THE WRONG TERM");
                         continue;
                     }
                     break;
                 } else {
-                    System.out.println("Sayısal olmayan değer giriniz");
+                    System.out.println("YOU ENTERED A NON-NUMERIC VALUE ! ");
                     input.next();
                 }
             }
 
 
             while (true) {
-                System.out.print("Açmak istediğiniz koordinatın Col(sütun) değerini giriniz : ");
+                System.out.print("Enter the coordinate Column value you want to open:");    // Selection 9
                 if (input.hasNextInt()) {
                     goCol = input.nextInt();
                     System.out.println("----------------------------------------------------");
-                    if (goCol < 0 || goCol > colNumber - 1) {
-                        System.out.println("Alan dışı değer girdiniz .");
+                    if (goCol < 0 || goCol > colNumber - 1) {       // Selection 10
+                        System.out.println("YOU ENTERED A NON-NUMERIC VALUE ! ");
                         continue;
                     }
                     break;
                 } else {
-                    System.out.println("Sayısal olmayan değer girdiniz . ");
+                    System.out.println("YOU ENTERED THE WRONG TERM ! ");
                     input.next();
                 }
             }
 
 
             if (!board[goRow][goCol].equals("-")) {
-                System.out.println("Aynı koordinatı denediniz. Başka değer giriniz .");
+                System.out.println("You selected the same coordinate. Enter another value.");
                 continue;
             }
 
-            if (map[goRow][goCol].equals("*")) {
-                System.out.println("Game Over !");
+            if (map[goRow][goCol].equals("*")) {  // Selection 13
+                System.out.println("Game Over !");   // Selection 15
                 break;
             } else {
                 checkMine(goRow, goCol);
                 createNew(goRow, goCol);
                 mineCounter = 0;
-                System.out.println("NICE CHOICE");
+                System.out.println("GOOD CHOICE");
                 winCounteR++;
-                if(winCounteR == boardSize - (boardSize * 25 / 100)){
-                    System.out.println("Tebrikler.. Oyunu kazandınız .");
+                if(winCounteR == boardSize - (boardSize * 25 / 100)){   // Selection 14
+                    System.out.println("Congratulations .. You win the game !");  // Selection 15
                     break;
                 }
 
@@ -96,8 +97,8 @@ public class MineSweeperV2 {
 
     }
 
-    // girilen col ve row değerleri kadar harita oluştur ve her bloğa - yazdır.
-    public void createMap(String[][] array) {
+    // Create a map as long as the entered col and row values and print "-" in each block.
+    public void createMap(String[][] array) {       // Selection 6
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 if ("*".equals(array[i][j])) {
@@ -113,8 +114,8 @@ public class MineSweeperV2 {
     }
 
 
-    // tahtanın boyutunun çeyreği kadar mayın oluştur ve rastgele dağıt
-    public void prepareGame() {
+    // create mines a quarter of the dimension of the board and distribute them randomly
+    public void prepareGame() {         // Selection 8
         int rowMine, colMine, mineCount = 0;
 
         while (mineCount != (boardSize / 4)) {
@@ -129,8 +130,8 @@ public class MineSweeperV2 {
     }
 
 
-    //
-    public void createNew(int goRow, int goCol) {
+    // design the layout of the board
+    public void createNew(int goRow, int goCol) {       //Selection 11
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j].equals(board[goRow][goCol])) {
@@ -145,8 +146,8 @@ public class MineSweeperV2 {
     }
 
 
-    // Seçilen koordinatın etrafındaki blokları kontrol et ve mayın sayısı kadar seçilen mayını yazdır.
-    public void checkMine(int rowControl, int colControl) {
+    // Check the blocks around the selected coordinate and write mines on the selected block as many as the number of mines.
+    public void checkMine(int rowControl, int colControl) {     // Selection 12
         if (map[rowControl][colControl].equals("-")) {
             if ((colControl < (colNumber - 1)) && (map[rowControl][colControl + 1]).equals("*")) {
                 mineCounter++;

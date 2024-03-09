@@ -10,13 +10,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int row, col;
 
-        // satır 2 den büyük veya integer deger olma sorgusu
+        // Query for Row to be greater than 2 or an integer value
         while (true) {
-            System.out.print("Tahtanın boyutu için Row(satır) değeri giriniz : ");
+            System.out.print("Enter the Row value for the size of the board : ");       //Selection 7
             if (scanner.hasNextInt()) {
                 row = scanner.nextInt();
                 if (row < 2) {
-                    System.out.println("Girdiğiniz değer 2 'den büyük olmalı .");
+                    System.out.println("The value you enter must be greater than 2. ");
                     continue;
                 }
                 break;
@@ -25,14 +25,14 @@ public class Main {
                 scanner.next();
             }
         }
-        // sütun 2 den büyük veya integer deger olma sorgusu
+        // Query for column to be greater than 2 or an integer value
         while (true) {
-            System.out.print("Tahtanın boyutu için Col(sütun) değerini giriniz :");
+            System.out.print("Enter the Column value for the size of the board : ");    //Selection 7
             if (scanner.hasNextInt()) {
                 col = scanner.nextInt();
                 System.out.println("----------------------------------------------------");
                 if (col < 2) {
-                    System.out.println("Girdiğiniz değer 2 'den büyük olamlı .");
+                    System.out.println("The value you enter must be greater than 2. ");
                     continue;
                 }
                 break;
@@ -41,7 +41,7 @@ public class Main {
                 scanner.next();
             }
         }
-        // oyunu başlat , row ve col değerlerini entegre et.
+        // start the game, integrate row and column values.
         MineSweeperV2 mine = new MineSweeperV2(row, col);
         mine.playGame();
 
